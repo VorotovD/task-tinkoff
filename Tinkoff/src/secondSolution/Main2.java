@@ -27,7 +27,7 @@ public class Main2 {
                 liftsForTrim.remove(var);
                 while (hasStartVar(liftsForTrim,now)) {
                     variants = getVariants(liftsForTrim, now);
-                    //variants = variants.stream().sorted(); // TODO может помочь при переборе,реализовать
+                    //variants = variants.stream().sorted(); // TODO возможно сможет помочь при переборе,реализовать
                     for (Lift var2 : variants) {
                         now = var2.getEndFloor();
                         intermResult++;

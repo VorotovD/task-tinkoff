@@ -3,8 +3,8 @@ package secondSolution;
 import java.util.Objects;
 
 public class Lift {
-    public int startFloor;
-    public int endFloor;
+    private final int startFloor;
+    private final int endFloor;
 
     public Lift(int startFloor, int endFloor) {
         this.startFloor = startFloor;
