@@ -1,3 +1,5 @@
+package secondSolution;
+
 import java.util.*;
 
 public class Main2 {
