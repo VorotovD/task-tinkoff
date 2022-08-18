@@ -2,7 +2,7 @@ package secondSolution;
 
 import java.util.*;
 
-public class Main2 {
+public class Result {
     public static void main(String[] args) {
         int startFloor=100000;
 

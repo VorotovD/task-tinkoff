@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import secondSolution.Lift;
-import secondSolution.Main2;
+import secondSolution.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class ResultTest {
         lifts.add(new Lift(1,2));
         lifts.add(new Lift(2,3));
         lifts.add(new Lift(3,4));
-        Assertions.assertEquals(3, Main2.getMaxPath(lifts,1));
+        Assertions.assertEquals(3, Result.getMaxPath(lifts,1));
     }
 
     //@Test
@@ -27,7 +27,7 @@ public class ResultTest {
         lifts.add(new Lift(6,7));
         lifts.add(new Lift(4,5));
         lifts.add(new Lift(2,3));
-        Assertions.assertEquals(6, Main2.getMaxPath(lifts,1));
+        Assertions.assertEquals(6, Result.getMaxPath(lifts,1));
     }
     @Test
     public void lifts3_result3_repeat1() {
@@ -35,7 +35,7 @@ public class ResultTest {
         lifts.add(new Lift(1,2));
         lifts.add(new Lift(2,3));
         lifts.add(new Lift(2,2));
-        Assertions.assertEquals(3, Main2.getMaxPath(lifts,1));
+        Assertions.assertEquals(3, Result.getMaxPath(lifts,1));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class ResultTest {
         lifts.add(new Lift(2,3));
         lifts.add(new Lift(2,2));
         lifts.add(new Lift(3,3));
-        Assertions.assertEquals(4, Main2.getMaxPath(lifts,1));
+        Assertions.assertEquals(4, Result.getMaxPath(lifts,1));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class ResultTest {
         lifts.add(new Lift(6,8));
         lifts.add(new Lift(2,2));
         lifts.add(new Lift(0,2));
-        Assertions.assertEquals(6, Main2.getMaxPath(lifts,0));
+        Assertions.assertEquals(6, Result.getMaxPath(lifts,0));
     }
 
     @Test
