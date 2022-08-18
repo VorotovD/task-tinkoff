@@ -1,3 +1,5 @@
+package firstSolution;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,7 +29,7 @@ public class Main {
                 removeVarFomFloors(startTrimmed,endTrimmed,var);
                 while (startTrimmed.contains(now)) {
                     variants = getVariants(startTrimmed,endTrimmed,now);
-//                    variants = variants.stream().sorted().toList();
+                    variants = variants.stream().sorted().toList();
                     for (Integer var2: variants) {
                     now =var2;
                     intermResult++;
