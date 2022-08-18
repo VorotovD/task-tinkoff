@@ -2,12 +2,10 @@ package secondSolution;
 
 import java.util.*;
 
-public class Main2 {
+public class Result {
     public static void main(String[] args) {
-        List<Integer> results = new ArrayList<>();
-        int intermResult = 0;
-        int now;
         int startFloor=100000;
+
         int n = new Scanner(System.in).nextInt();
         List<Lift> lifts = new ArrayList<>();
         for (int i = 0; i < n; i++) {
@@ -18,6 +16,15 @@ public class Main2 {
                 startFloor = Integer.parseInt(numbers[0]);
             }
         }
+        System.out.println(getMaxPath(lifts,startFloor));
+
+    }
+
+    public static int getMaxPath(List<Lift> lifts, int startFloor) {
+        List<Integer> results = new ArrayList<>();
+        int now;
+        int intermResult = 0;
+        lifts.sort(Lift::compareTo);
         for (Lift lift : lifts) {
             ArrayList<Lift> liftsForTrim = new ArrayList<>(lifts);
             ArrayList<Lift> variants = getVariants(liftsForTrim, startFloor);
@@ -26,8 +33,7 @@ public class Main2 {
                 intermResult++;
                 liftsForTrim.remove(var);
                 while (hasStartVar(liftsForTrim,now)) {
-                    variants = getVariants(liftsForTrim, now);
-                    //variants = variants.stream().sorted(); // TODO возможно сможет помочь при переборе,реализовать
+                    variants =getVariants(liftsForTrim, now);
                     for (Lift var2 : variants) {
                         now = var2.getEndFloor();
                         intermResult++;
@@ -45,8 +51,7 @@ public class Main2 {
                 max = intermRes;
             }
         }
-        System.out.println(max);
-
+        return max;
     }
 
     public static boolean hasStartVar(ArrayList<Lift> lifts, int now) {
