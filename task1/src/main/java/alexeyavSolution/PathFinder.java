@@ -1,5 +1,7 @@
 package alexeyavSolution;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -11,14 +13,19 @@ public class PathFinder {
     private PathFinder() {
     }
 
-    private static Path findPathFromFloor(Set<Lift> liftSet, int floor) {
+    private static Path findLongestPathFromFloor(Set<Lift> liftSet, int floor) {
+        Path result = new Path(List.of());
+
         for(Lift lift: liftSet) {
             if (lift.getFrom() == floor) {
-                Path path = findPathFromFloor(liftSet, lift.getTo());
-                return new Path(lift, path);
+                Path path = findLongestPathFromFloor(liftSet, lift.getTo());
+                Path resultCandidate = new Path(lift,path);
+                if (resultCandidate.length() > result.length()) {
+                    result = resultCandidate;
+                }
             }
         }
-        return new Path(List.of());
+        return result;
     }
 
     /**
@@ -27,7 +34,7 @@ public class PathFinder {
      * @return Лифтовой маршрут
      */
     public static Path findPath(Set<Lift> liftSet) {
-        return findPathFromFloor(liftSet, 1);
+        return findLongestPathFromFloor(liftSet, 1);
     }
 
     /**

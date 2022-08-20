@@ -21,7 +21,7 @@ public class Lift {
      * @param to     Этаж, на который приходит
      */
     public Lift(int number, int from, int to) {
-        if (number < 0 || from < 0 || from >= to) {
+        if (number < 0 || from < 0 || from > to) {
             throw new IllegalArgumentException("Неправильный параметры в консТрукторе лифта");
         }
         this.number = number;
