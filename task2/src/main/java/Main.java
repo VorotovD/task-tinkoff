@@ -10,10 +10,10 @@ public class Main {
         teams.add(new Team("AND","VLA","ILY"));
         teams.add(new Team("VLA","IVA","AND"));
 
-        System.out.println(getMaxWinVictories(teams));
+        System.out.println(getMaxWins(teams));
     }
 
-    public static int getMaxWinVictories(List<Team> teams) {
+    public static int getMaxWins(List<Team> teams) {
         int result = 0;
         for (Team team : teams) {
             int i = 0;
