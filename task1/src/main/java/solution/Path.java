@@ -1,4 +1,4 @@
-package alexeyavSolution;
+package solution;
 
 import java.util.ArrayList;
 import java.util.Collections;

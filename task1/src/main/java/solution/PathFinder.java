@@ -1,7 +1,5 @@
-package alexeyavSolution;
+package solution;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -34,7 +32,13 @@ public class PathFinder {
      * @return Лифтовой маршрут
      */
     public static Path findPath(Set<Lift> liftSet) {
-        return findLongestPathFromFloor(liftSet, 1);
+        int minFloor = 1000000;
+        for (Lift lift:liftSet) {
+            if (lift.getFrom() <minFloor) {
+                minFloor =lift.getFrom();
+            }
+        }
+        return findLongestPathFromFloor(liftSet, minFloor);
     }
 
     /**
