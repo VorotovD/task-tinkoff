@@ -13,6 +13,11 @@ public class Main {
         System.out.println(getMaxWins(teams));
     }
 
+    /**
+     * Method finding the greatest number of wins of team in one composition
+     * @param teams List of teams
+     * @return greatest number of wins of team in one composition
+     */
     public static int getMaxWins(List<Team> teams) {
         int result = 0;
         for (Team team : teams) {
