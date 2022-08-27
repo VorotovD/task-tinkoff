@@ -6,7 +6,7 @@ import java.util.TreeSet;
  * Класс, описывающий прямую полку с товарами разных категории и методы передвижения по ней
  * Передвижение по категориям товаров выполняется в порядке возрастания категорий
  */
-public class Shelves {
+public class Shelf {
     private final ArrayList<Character> category;
     private final ArrayList<Integer[]> sequences;
 
@@ -14,7 +14,7 @@ public class Shelves {
      * @param category  Последовательность категорий товаров на полке
      * @param sequences Лист массивов границ подполок главной полки
      */
-    public Shelves(String category, ArrayList<Integer[]> sequences) {
+    public Shelf(String category, ArrayList<Integer[]> sequences) {
         this.category = new ArrayList<>();
         for (int i = 0; i < category.length(); i++) {
             this.category.add(category.toLowerCase().charAt(i));
@@ -36,7 +36,7 @@ public class Shelves {
      * @param end   Конечный индекс подполки
      * @return Отсротированная по возрастанию категорий и их позиций, подполка главной подполки
      */
-    public TreeMap<Character, TreeSet<Integer>> getTreeMapShelves(int start, int end) {
+    public TreeMap<Character, TreeSet<Integer>> getTreeMapShelf(int start, int end) {
         TreeMap<Character, TreeSet<Integer>> result = new TreeMap<>();
         for (Character character : category) {
             TreeSet<Integer> positions = new TreeSet<>();
@@ -62,7 +62,7 @@ public class Shelves {
         for (Integer[] seq : sequences) {
             int intmResult = 0;
             int length = seq[1] - seq[0] + 1;
-            TreeMap<Character, TreeSet<Integer>> res = getTreeMapShelves(seq[0], seq[1]);
+            TreeMap<Character, TreeSet<Integer>> res = getTreeMapShelf(seq[0], seq[1]);
             int previousPosition = seq[0];
             for (Character set : res.keySet()) {
                 for (Integer pos : res.get(set)) {

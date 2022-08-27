@@ -16,10 +16,10 @@ public class Main {
         sequences.add(seq1);
         sequences.add(seq2);
         sequences.add(seq3);
-        Shelves shelves = new Shelves("Hello",sequences);
+        Shelf shelves = new Shelf("Hello",sequences);
 
-        System.out.println(shelves.getTreeMapShelves(0,4));
-        System.out.println(shelves.getTreeMapShelves(2,4));
+        System.out.println(shelves.getTreeMapShelf(0,4));
+        System.out.println(shelves.getTreeMapShelf(2,4));
         System.out.println(shelves.getCountOperations().toString());
 
     }
