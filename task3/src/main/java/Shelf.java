@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Класс, описывающий прямую полку с товарами разных категории и методы передвижения по ней
@@ -8,23 +6,15 @@ import java.util.TreeSet;
  */
 public class Shelf {
     private final ArrayList<Character> category;
-    private final ArrayList<Integer[]> sequences;
 
     /**
-     * @param category  Последовательность категорий товаров на полке
-     * @param sequences Лист массивов границ подполок главной полки
+     * @param category Последовательность категорий товаров на полке
      */
-    public Shelf(String category, ArrayList<Integer[]> sequences) {
+    public Shelf(String category) {
         this.category = new ArrayList<>();
         for (int i = 0; i < category.length(); i++) {
             this.category.add(category.toLowerCase().charAt(i));
         }
-        for (Integer[] seq : sequences) {
-            if (seq[0] < 0 || seq[1] > category.length() || seq[0] > seq[1]) {
-                throw new IllegalArgumentException("Неверные границы подполок");
-            }
-        }
-        this.sequences = sequences;
     }
 
     /**
@@ -36,8 +26,9 @@ public class Shelf {
      * @param end   Конечный индекс подполки
      * @return Отсротированная по возрастанию категорий и их позиций, подполка главной подполки
      */
-    public TreeMap<Character, TreeSet<Integer>> getTreeMapShelf(int start, int end) {
-        TreeMap<Character, TreeSet<Integer>> result = new TreeMap<>();
+    //TODO упростить метод
+    public Map<Character, Set<Integer>> getTreeMapShelf(int start, int end) {
+        Map<Character, Set<Integer>> result = new TreeMap<>();
         for (Character character : category) {
             TreeSet<Integer> positions = new TreeSet<>();
             for (int i = start; i <= end; i++) {
@@ -53,33 +44,59 @@ public class Shelf {
     }
 
     /**
-     * Метод рассчитывает сумму передвижений по каждой подполке в отдельности
+     * Метод рассчитывает сумму передвижений для подполки
      *
-     * @return Массив сумм передвижений для каждой подполки
+     * @param sequence Координаты подполки
+     * @return Сумму передвижений для подполки
      */
-    public ArrayList<Integer> getCountOperations() {
-        ArrayList<Integer> result = new ArrayList<>();
-        for (Integer[] seq : sequences) {
-            int intmResult = 0;
-            int length = seq[1] - seq[0] + 1;
-            TreeMap<Character, TreeSet<Integer>> res = getTreeMapShelf(seq[0], seq[1]);
-            int previousPosition = seq[0];
-            for (Character set : res.keySet()) {
-                for (Integer pos : res.get(set)) {
-                    if (!pos.equals(previousPosition)) {
-                        if (previousPosition < pos) {
-                            intmResult += pos - previousPosition;
-                        } else {
-                            intmResult += length - previousPosition + pos;
-                        }
-                        previousPosition = pos;
-
+    public int getCountOperations(Integer[] sequence) {
+        int countOperations = 0;
+        int shelfLength = sequence[1] - sequence[0] + 1;
+        int actualPosition = sequence[0];
+        Map<Character, Set<Integer>> res = getTreeMapShelf(sequence[0], sequence[1]);
+        for (Character set : res.keySet()) {
+            while (!res.get(set).isEmpty()) {
+                int nextPosition = getNextIndex(res.get(set), actualPosition, shelfLength);
+                if (actualPosition < nextPosition) {
+                    countOperations += nextPosition - actualPosition;
+                } else {
+                    if (actualPosition != nextPosition) {
+                        countOperations += shelfLength - actualPosition + nextPosition;
                     }
                 }
+                actualPosition = nextPosition;
             }
-            result.add(intmResult);
         }
-        return result;
+        return countOperations;
+    }
+
+    /**
+     * Метод вычисляет ближайший следующий индекс для категории с учетом передвижения только в сторону увеличения индексов,
+     * удаляет результирующий индекс из набора индексов
+     *
+     * @param setPositions   Позиции данной котегории в полке
+     * @param actualPosition Текущая позиция
+     * @param shelfLength    Длина полки
+     * @return Ближайший индекс для данной категории
+     */
+    public int getNextIndex(Set<Integer> setPositions, int actualPosition, int shelfLength) {
+        Integer[] result = new Integer[2];
+        result[0] = 0;
+        result[1] = 100000;
+        for (Integer candidatePosition : setPositions) {
+            int path;
+            if (candidatePosition < actualPosition) {
+                path = shelfLength - actualPosition + candidatePosition;
+            } else {
+                path = candidatePosition - actualPosition;
+            }
+            if (result[1] > path) {
+                result[1] = path;
+                result[0] = candidatePosition;
+            }
+        }
+        setPositions.remove(result[0]);
+        return result[0];
     }
 
 }

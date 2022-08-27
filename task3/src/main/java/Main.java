@@ -8,7 +8,7 @@ public class Main {
         Integer[] seq2 = new Integer[2];
         Integer[] seq3 = new Integer[2];
         seq1[0] = 0;
-        seq1[1] = 4;
+        seq1[1] = 5;
         seq2[0] = 0;
         seq2[1] = 1;
         seq3[0] = 1;
@@ -16,11 +16,12 @@ public class Main {
         sequences.add(seq1);
         sequences.add(seq2);
         sequences.add(seq3);
-        Shelf shelves = new Shelf("Hello",sequences);
+        Shelf shelves = new Shelf("cttatc");
 
-        System.out.println(shelves.getTreeMapShelf(0,4));
-        System.out.println(shelves.getTreeMapShelf(2,4));
-        System.out.println(shelves.getCountOperations().toString());
+        System.out.println(shelves.getCountOperations(sequences.get(0)));
+        System.out.println(shelves.getCountOperations(sequences.get(1)));
+        System.out.println(shelves.getCountOperations(sequences.get(2)));
+
 
     }
 }
